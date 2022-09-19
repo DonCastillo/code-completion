@@ -1,10 +1,4 @@
-# Assignment D
-
-Updated: 2022-09-11 by Nicole Wilson &lt;n.wilson@uleth.ca&gt;
-
-* The updates to the Makefile allow the project to compile with all tests on both Ubuntu and via gitlab.
-
-* For an assignment requiring the use of a variety of tests and consisting of one program with associated classes that have header files and source files.
+# Code Completion
 
 * The source files must be saved in a directory named <code>src/</code>, the header files must be stored in a directory named <code>include/</code>, and the test files (using gtest) must be stored in a directory named <code>test/</code>.
 
