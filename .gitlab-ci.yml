@@ -7,15 +7,15 @@ stages:
 buildTests:
    stage: build
    script:
-      - make test_project
+      - make test_codeCompletion
    artifacts:
       paths:
-         - test_project
+         - test_codeCompletion
 
 test:
    stage: test
    script:
-      - test_project
+      - test_codeCompletion
 
 staticAnalysis:
    stage: quality

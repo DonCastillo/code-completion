@@ -3,7 +3,7 @@
 # the files created are found in the .gitignore
 # Changing any names below can change the target names which 
 # will require that you update .gitlab_ci.yml and .gitignore
-PROJECT = project
+PROJECT = codeCompletion
 GTEST = test_${PROJECT}
 
 
@@ -15,7 +15,7 @@ LINKFLAGS= -lgtest
 
 # Directories
 SRC_DIR = src
-PROJECT_SRC_DIR = src/project
+PROJECT_SRC_DIR = src/cmdline
 GTEST_DIR = test
 SRC_INCLUDE = include
 INCLUDE = -I ${SRC_INCLUDE}
@@ -41,7 +41,7 @@ endif
 DOXY_DIR = docs/code
 
 # Default goal, used by Atom for local compilation
-.DEFAULT_GOAL := compileProject
+.DEFAULT_GOAL := $(PROJECT)
 
 # default rule for compiling .cc to .o
 %.o: %.cpp
@@ -62,7 +62,7 @@ ${GTEST}: ${GTEST_DIR} ${SRC_DIR}
 	${GTEST_DIR}/*.cpp ${SRC_DIR}/*.cpp ${LINKFLAGS}
 
 # compilation using the files in include, src, and src/project, but not test
-compileProject: ${SRC_DIR} ${PROJECT_SRC_DIR}
+$(PROJECT): ${SRC_DIR} ${PROJECT_SRC_DIR}
 	${CXX} ${CXXVERSION} -o ${PROJECT} ${INCLUDE} \
 	${SRC_DIR}/*.cpp ${PROJECT_SRC_DIR}/*.cpp
 
