@@ -25,7 +25,7 @@ class CodeCompletion {
    * Return a
    * @param query A string with which to query the code completion system.
    * @return A pointer to an ordered list of suggestions for the query in descending order of
-   * relevance.
+   * relevance. The maximum number of suggestions is 7.
    */
   virtual std::vector<std::string>* getSuggestions(const std::string query) = 0;
 };
