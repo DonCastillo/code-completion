@@ -9,7 +9,7 @@ GTEST = test_${PROJECT}
 
 # Compilation command and flags
 CXX=g++
-CXXVERSION= -std=c++11
+CXXVERSION= -std=c++17
 CXXFLAGS= ${CXXVERSION} -g -fprofile-arcs -ftest-coverage
 LINKFLAGS= -lgtest
 
