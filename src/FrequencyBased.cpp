@@ -4,19 +4,28 @@
 #include <iostream>
 #include <filesystem>
 
-using std::filesystem::recursive_directory_iterator;
-using std::filesystem::is_regular_file;
+//using std::filesystem::recursive_directory_iterator;
+//using std::filesystem::is_regular_file;
+namespace fs = std::filesystem;
+
+std::vector<fs::path> FrequencyBased::getNonEmptyFiles(std::string directory) {
+  std::vector<fs::path> files;
+  for (const fs::directory_entry &directory_entry : fs::recursive_directory_iterator(
+      directory)) {
+    if (directory_entry.exists() && directory_entry.is_regular_file()
+        && !fs::is_empty(directory_entry.path())) {
+      std::cout << directory_entry.path() << std::endl;
+      files.push_back(directory_entry.path());
+    }
+  }
+  return files;
+}
 
 void FrequencyBased::readData(std::string directory) {
 
   std::cout << "Start reading the data " << directory << std::endl;
+  getNonEmptyFiles(directory);
 
-  // scan directories and subdirectories
-  for (const auto &file : recursive_directory_iterator(directory)) {
-    std::cout << file.path() << std::endl;
-    std::cout << is_regular_file(file.path()) << std::endl;
-
-  }
 
 }
 

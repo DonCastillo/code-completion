@@ -7,6 +7,9 @@
 #include "CodeCompletion.h"
 #include <string>
 #include <vector>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 class FrequencyBased : public CodeCompletion {
  public:
@@ -29,6 +32,8 @@ class FrequencyBased : public CodeCompletion {
    * relevance. The maximum number of suggestions is 7.
    */
   std::vector<std::string>* getSuggestions(const std::string query);
+
+  std::vector<fs::path> getNonEmptyFiles(std::string directory);
 };
 
 #endif //FREQUENCY_BASED_H_INCLUDED
