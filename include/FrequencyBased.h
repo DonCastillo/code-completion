@@ -4,10 +4,11 @@
 #ifndef FREQUENCY_BASED_H_INCLUDED
 #define FREQUENCY_BASED_CLASS_H_INCLUDED
 
+#include "CodeCompletion.h"
 #include <string>
 #include <vector>
 
-class FrequencyBased {
+class FrequencyBased : public CodeCompletion {
  public:
   FrequencyBased() {
   }
