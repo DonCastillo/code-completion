@@ -1,9 +1,10 @@
 #include "FrequencyBased.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 void FrequencyBased::readData(std::string directory) {
-
+  std::cout << "Start reading the data" << std::endl;
 }
 
 std::vector<std::string>* FrequencyBased::getSuggestions(
