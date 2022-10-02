@@ -4,7 +4,7 @@
 #include <string>
 int main() {
 
-  std::string directory = "../../data/chess/";
+  std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);
 
