@@ -33,7 +33,12 @@ class FrequencyBased : public CodeCompletion {
    */
   std::vector<std::string>* getSuggestions(const std::string query);
 
+  // returns a list of paths of nonempty files
   std::vector<fs::path> getNonEmptyFiles(std::string directory);
+
+  // read a file and output the content
+  std::string getFileContent(fs::path filePath);
+
 };
 
 #endif //FREQUENCY_BASED_H_INCLUDED
