@@ -1,5 +1,6 @@
 #include "FrequencyBased.h"
 #include "FileReader.h"
+#include "RegExp.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -12,11 +13,15 @@ namespace fs = std::filesystem;
 void FrequencyBased::readData(std::string directory) {
 
   std::cout << "Start reading the data " << directory << std::endl;
+  
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directory);
-  fs::path firstFilePath = files[1];
+  fs::path firstFilePath = files[0];
+  
   std::cout << "Reading file from source " << firstFilePath << std::endl;
   std::string output = FileReader::getFileContent(firstFilePath);
-  std::cout << "Output is " << std::endl << output << std::endl;
+
+  RegExp::getMatches(output);
+
 
 }
 
