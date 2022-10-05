@@ -43,7 +43,7 @@ void FrequencyBased::readData(std::string directory) {
 
   std::vector<std::string> matches = RegExp::getMatchingMethodNames(output);
   // for(int i = 0; i < matches.size(); ++i) {
-  //   std::cout << i + 1 << " " << matches[i] << std::endl; 
+  //   std::cout << i + 1 << " " << matches[i] << std::endl;
   // }
   appendFrequencies(totalFrequencies, methods1);
   appendFrequencies(totalFrequencies, methods1);
@@ -74,7 +74,6 @@ void FrequencyBased::readData(std::string directory) {
   for (const auto &row : totalFrequencies) {
     std::cout << row.first << ": " << row.second << std::endl;
   }
-
 }
 
 std::vector<std::string>* FrequencyBased::getSuggestions(

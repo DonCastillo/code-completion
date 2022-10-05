@@ -10,7 +10,7 @@ std::vector<std::string> RegExp::getMatchingMethodNames(
 
   std::cout << "Inside getMatchingMethodNames" << std::endl;
 
-  // select all statements with open-parentheses 
+  // select all statements with open-parentheses
   const std::regex PATTERN1("\\b(std::|::)?\\w{2,}(?=\\()");
 
   // select all statements starting with for, if, else, while, switch
@@ -45,8 +45,6 @@ std::vector<std::string> RegExp::getMatchingMethodNames(
       continue;
     }
 
-    // bool b = std::regex_match(matchedString, c, PATTERN2);
-    // std::cout << "MATCH: " << ++index << " " << matchedString << "  " << std::endl;
     finalMatches.push_back(matchedString);
   }
   return finalMatches;

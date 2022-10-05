@@ -3,7 +3,6 @@
 #include "FrequencyBased.h"
 #include <string>
 int main() {
-
   std::string directory = "./data/sample/";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);

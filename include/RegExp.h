@@ -14,9 +14,6 @@ class RegExp {
 
   static std::vector<std::string> getMatchingMethodNames(
       const std::string &lines);
-
- private:
-
 };
 
 #endif /* INCLUDE_REGEXP_H_ */
