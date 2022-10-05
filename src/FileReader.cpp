@@ -19,7 +19,6 @@ std::vector<fs::path> FileReader::getNonEmptyFiles(std::string directory) {
   return files;
 }
 
-
 std::string FileReader::getFileContent(fs::path filePath) {
   std::string output;
   std::ifstream file(filePath);
@@ -27,7 +26,7 @@ std::string FileReader::getFileContent(fs::path filePath) {
   if (file.is_open()) {
     char c;
     while (file.get(c)) {
-      if(c != '\t' && c != '\n') 
+      if (c != '\t' && c != '\n')
         output.push_back(c);
     }
   }

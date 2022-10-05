@@ -34,7 +34,8 @@ class FrequencyBased : public CodeCompletion {
    */
   std::vector<std::string>* getSuggestions(const std::string query);
 
-  void appendFrequencies(std::map<std::string, int>& master, std::map<std::string, int>& toAppend);
+  void appendFrequencies(std::map<std::string, int> &master,
+                         std::map<std::string, int> &toAppend);
 };
 
 #endif //FREQUENCY_BASED_H_INCLUDED
