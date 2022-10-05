@@ -6,10 +6,10 @@
 
 
 
-std::vector<std::string> RegExp::getMatches(const std::string& lines) {
+std::vector<std::string> RegExp::getMatchingMethodNames(const std::string& lines) {
     std::vector<std::string> finalMatches;
 
-    std::cout << "Inside GetMatches" << std::endl;
+    std::cout << "Inside getMatchingMethodNames" << std::endl;
 
     // select all statements with open-parentheses 
     const std::regex PATTERN1("\\b(std::|::)?\\w{2,}(?=\\()");
