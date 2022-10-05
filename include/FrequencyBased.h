@@ -36,6 +36,12 @@ class FrequencyBased : public CodeCompletion {
 
   void appendFrequencies(std::map<std::string, int> &master,
                          std::map<std::string, int> &toAppend);
+
+  std::vector<std::pair<std::string, int>> sortFrequencies(
+      const std::map<std::string, int> &frequencies);
+
+  static bool sortByVal(const std::pair<std::string, int> &a,
+                 const std::pair<std::string, int> &b);
 };
 
 #endif //FREQUENCY_BASED_H_INCLUDED

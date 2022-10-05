@@ -8,22 +8,26 @@
 #include <fstream>
 #include <cctype>
 #include <map>
+#include <utility>
+#include <algorithm>
 
 namespace fs = std::filesystem;
 
-void FrequencyBased::appendFrequencies(std::map<std::string, int> &master,
-                                       std::map<std::string, int> &toAppend) {
-  for (const auto &row : toAppend) {
-    std::string key = row.first;
-    int value = row.second;
+bool FrequencyBased::sortByVal(const std::pair<std::string, int> &a,
+               const std::pair<std::string, int> &b) {
+  return a.second > b.second;
+}
 
-    auto search = master.find(key);
-    if (search != master.end()) {
-      master[key] = master[key] + toAppend[key];
-    } else {
-      master[key] = toAppend[key];
-    }
+std::vector<std::pair<std::string, int>> FrequencyBased::sortFrequencies(
+    const std::map<std::string, int> &frequencies) {
+
+  std::vector<std::pair<std::string, int>> freqPair;
+  for (const auto &row : frequencies) {
+    freqPair.push_back(std::make_pair(row.first, row.second));
   }
+
+  std::sort(freqPair.begin(), freqPair.end(), sortByVal);
+  return freqPair;
 }
 
 void FrequencyBased::readData(std::string directory) {
@@ -46,33 +50,29 @@ void FrequencyBased::readData(std::string directory) {
   //   std::cout << i + 1 << " " << matches[i] << std::endl;
   // }
   appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
-  appendFrequencies(totalFrequencies, methods2);
-  appendFrequencies(totalFrequencies, methods1);
   appendFrequencies(totalFrequencies, methods2);
 
-  std::cout << "totalFrequencies:" << std::endl;
-  for (const auto &row : totalFrequencies) {
+  // std::cout << "totalFrequencies:" << std::endl;
+  std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
+      totalFrequencies);
+  for (const auto &row : sortedFreq) {
     std::cout << row.first << ": " << row.second << std::endl;
+  }
+
+}
+
+void FrequencyBased::appendFrequencies(std::map<std::string, int> &master,
+                                       std::map<std::string, int> &toAppend) {
+  for (const auto &row : toAppend) {
+    std::string key = row.first;
+    int value = row.second;
+
+    auto search = master.find(key);
+    if (search != master.end()) {
+      master[key] = master[key] + toAppend[key];
+    } else {
+      master[key] = toAppend[key];
+    }
   }
 }
 
