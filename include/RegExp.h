@@ -12,7 +12,7 @@ class RegExp {
   virtual ~RegExp() {
   }
 
-  static std::vector<std::string> getMatchingMethodNames(
+  static std::vector<std::string> getMethodNames(
       const std::string &lines);
 };
 

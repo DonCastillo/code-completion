@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-std::vector<std::string> RegExp::getMatchingMethodNames(
+std::vector<std::string> RegExp::getMethodNames(
     const std::string &lines) {
   std::vector<std::string> finalMatches;
 
