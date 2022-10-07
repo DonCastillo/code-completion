@@ -40,19 +40,22 @@ void FrequencyBased::readData(std::string directory) {
   std::cout << "Start reading the data " << directory << std::endl;
 
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directory);
-  fs::path firstFilePath = files[0];
+  fs::path firstFilePath = files[3];
 
   std::cout << "Reading file from source " << firstFilePath << std::endl;
   std::string output = FileReader::getFileContent(firstFilePath);
 
-  std::vector<std::string> matches = RegExp::getMatchingMethodNames(output);
+  std::vector<std::string> matches = RegExp::getMethodNames(output);
   // for(int i = 0; i < matches.size(); ++i) {
   //   std::cout << i + 1 << " " << matches[i] << std::endl;
   // }
-  appendFrequencies(totalFrequencies, methods1);
+
+  
+  std::map<std::string, int> words =  countFrequencies(RegExp::getMethodNames(output));
+  //appendFrequencies(totalFrequencies, words);
   appendFrequencies(totalFrequencies, methods2);
 
-  // std::cout << "totalFrequencies:" << std::endl;
+  std::cout << "totalFrequencies:" << std::endl;
   std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
       totalFrequencies);
   for (const auto &row : sortedFreq) {
@@ -75,6 +78,23 @@ void FrequencyBased::appendFrequencies(std::map<std::string, int> &master,
     }
   }
 }
+
+std::map<std::string, int> FrequencyBased::countFrequencies(
+      const std::vector<std::string> &methods) {
+ 
+
+    std::map<std::string, int> frequencies;
+
+    for(const std::string& s : methods) {
+         ++frequencies[s];
+    }
+
+    std::cout << frequencies["Coordinate"] << std::endl;
+ 
+      
+    return frequencies;
+  }
+
 
 std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
