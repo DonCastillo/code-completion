@@ -8,7 +8,7 @@ std::vector<std::string> RegExp::getMethodNames(
     const std::string &lines) {
   std::vector<std::string> finalMatches;
 
-  std::cout << "Inside getMatchingMethodNames" << std::endl;
+ // std::cout << "Inside getMatchingMethodNames" << std::endl;
 
   // select all statements with open-parentheses
   const std::regex PATTERN1("\\b(std::|::)?\\w{2,}(?=\\()");

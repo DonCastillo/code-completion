@@ -32,28 +32,22 @@ std::vector<std::pair<std::string, int>> FrequencyBased::sortFrequencies(
 
 void FrequencyBased::readData(std::string directory) {
   std::map<std::string, int> totalFrequencies;
-  std::map<std::string, int> methods1 { { "typeid", 5 }, { "getX", 4 }, {
-      "getY", 6 }, { "pathClear", 1 } };
-  std::map<std::string, int> methods2 { { "typeid", 2 }, { "getX", 1 }, {
-      "isCheck", 1 }, { "Coordinate", 1 } };
-
+ 
   std::cout << "Start reading the data " << directory << std::endl;
 
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directory);
-  fs::path firstFilePath = files[3];
+//  fs::path firstFilePath = files[3];
+ 
 
-  std::cout << "Reading file from source " << firstFilePath << std::endl;
-  std::string output = FileReader::getFileContent(firstFilePath);
 
-  std::vector<std::string> matches = RegExp::getMethodNames(output);
-  // for(int i = 0; i < matches.size(); ++i) {
-  //   std::cout << i + 1 << " " << matches[i] << std::endl;
-  // }
-
-  
-  std::map<std::string, int> words =  countFrequencies(RegExp::getMethodNames(output));
-  //appendFrequencies(totalFrequencies, words);
-  appendFrequencies(totalFrequencies, methods2);
+  std::string output;
+  std::map<std::string, int> words;
+  for (const auto &row : files) {
+       output = FileReader::getFileContent(row);
+       words = countFrequencies(RegExp::getMethodNames(output));
+       appendFrequencies(totalFrequencies, words); 
+  }
+ 
 
   std::cout << "totalFrequencies:" << std::endl;
   std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
@@ -61,6 +55,8 @@ void FrequencyBased::readData(std::string directory) {
   for (const auto &row : sortedFreq) {
     std::cout << row.first << ": " << row.second << std::endl;
   }
+
+  database = sortedFreq;
 
 }
 
@@ -89,7 +85,7 @@ std::map<std::string, int> FrequencyBased::countFrequencies(
          ++frequencies[s];
     }
 
-    std::cout << frequencies["Coordinate"] << std::endl;
+    //std::cout << frequencies["Coordinate"] << std::endl;
  
       
     return frequencies;
@@ -98,6 +94,8 @@ std::map<std::string, int> FrequencyBased::countFrequencies(
 
 std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
+
+   // std::cout << query << ": " << database[0].first << ": " << database[0].second << std::endl;
 
   std::vector<std::string> *suggestions;
   suggestions->push_back("string1");
