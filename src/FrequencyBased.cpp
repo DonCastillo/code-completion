@@ -49,11 +49,11 @@ void FrequencyBased::readData(std::string directory) {
   }
  
 
-  std::cout << "totalFrequencies:" << std::endl;
+  //std::cout << "totalFrequencies:" << std::endl;
   std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
       totalFrequencies);
   for (const auto &row : sortedFreq) {
-    std::cout << row.first << ": " << row.second << std::endl;
+    //std::cout << row.first << ": " << row.second << std::endl;
   }
 
   database = sortedFreq;
@@ -95,11 +95,40 @@ std::map<std::string, int> FrequencyBased::countFrequencies(
 std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
 
-   // std::cout << query << ": " << database[0].first << ": " << database[0].second << std::endl;
+ // std::cout << query << ": " << database[0].first << ": " << database[0].second << std::endl;
 
-  std::vector<std::string> *suggestions;
-  suggestions->push_back("string1");
-  suggestions->push_back("string2");
+  std::cout << "SEARCHING FOR: " << query << ::std::endl;
+
+  std::vector<std::string>* suggestions = new std::vector<std::string>();
+  std::map<std::string, int> matches;
+  int counter;
+
+   for (const auto &row : database) {
+
+    if (counter == 7)
+      break;
+    
+    const std::regex e(query);
+    std::smatch m;
+
+    if (std::regex_search(row.first, m, e, std::regex_constants::match_default )) {
+         std::cout << "MATCH: " << row.first << std::endl;
+         matches.insert(row);
+         counter++;
+    }
+
+   }
+
+  std::vector<std::pair<std::string, int>> sortedMatches = sortFrequencies(
+      matches);
+
+
+  for (const auto &row : sortedMatches) {
+      suggestions->push_back(row.first);
+  }
+
+  
+  
   return suggestions;
 }
 

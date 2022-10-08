@@ -46,6 +46,9 @@ class FrequencyBased : public CodeCompletion {
 
   static bool sortByVal(const std::pair<std::string, int> &a,
                  const std::pair<std::string, int> &b);
+
+
+   std::vector<std::pair<std::string, int>> database;               
  
 };
 
