@@ -18,7 +18,7 @@ TEST(TestFrequencyBased, testSuggestion) {
   std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);
-  std::vector<std::string> *suggestions = new std::vector<std::string>();
+  std::vector<std::string> *suggestions;
   suggestions = freqBased->getSuggestions("getX");
 
   EXPECT_EQ("getX", suggestions->at(0));
@@ -33,7 +33,6 @@ TEST(TestFrequencyBased, testSuggestion) {
 }
 
 TEST(TestFrequencyBased, testAppend) {
-  std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   std::map<std::string, int> methods1 { { "typeid", 5 }, { "getX", 4 }, {
       "getY", 6 }, { "pathClear", 1 }, { "getX", 1 } };
@@ -50,7 +49,6 @@ TEST(TestFrequencyBased, testAppend) {
 }
 
 TEST(TestFrequencyBased, testFrequencyCount) {
-  std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
 
   std::vector<std::string> methods = { "typeId", "typeId", "reload",

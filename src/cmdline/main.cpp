@@ -14,7 +14,7 @@ int main() {
   std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);
-  std::vector<std::string> *suggestions = new std::vector<std::string>();
+  std::vector<std::string> *suggestions;
 
   std::string input;
   while (true) {
