@@ -14,10 +14,18 @@ class FileReader {
   virtual ~FileReader() {
   }
 
-  // returns a list of paths of nonempty files
+    /**
+   * Getting non empty files
+   * @param directory directory of data
+   * @return vector containing path of files 
+   */
   static std::vector<fs::path> getNonEmptyFiles(std::string directory);
 
-  // read a file and output the content
+   /**
+   * Reading file content
+   * @param filepath file path to read
+   * @return string of content from file
+   */
   static std::string getFileContent(fs::path filePath);
 };
 
