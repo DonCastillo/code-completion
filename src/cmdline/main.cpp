@@ -6,14 +6,16 @@
 #include "Exceptions.h"
 
 int main() {
+  std::cout << "\nWelcome to Code Complete 1.0 by Don & Karamullah" << std::endl;
+  std::cout << "Copyright © 2022\n\n" << std::endl;
+  std::cout << "Type x or exit to end the program any time.\n\n" << std::endl;
+
+
   std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);
   std::vector<std::string>* suggestions = new std::vector<std::string>();
 
-  std::cout << "\nWelcome to Code Complete 1.0 by Don & Karamullah" << std::endl;
-  std::cout << "Copyright © 2022\n\n" << std::endl;
-  std::cout << "Type x or exit to end the program any time.\n\n" << std::endl;
  
 
   //todo directory input

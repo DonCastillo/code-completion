@@ -34,10 +34,10 @@ std::vector<std::pair<std::string, int>> FrequencyBased::sortFrequencies(
 void FrequencyBased::readData(std::string directory) {
   std::map<std::string, int> totalFrequencies;
  
-  std::cout << "Start reading the data " << directory << std::endl;
+  std::cout << "Data imported from: " << directory << "\n" << std::endl;
 
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directory);
-//  fs::path firstFilePath = files[3];
+
  
 
 
@@ -50,12 +50,9 @@ void FrequencyBased::readData(std::string directory) {
   }
  
 
-  //std::cout << "totalFrequencies:" << std::endl;
+  
   std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
       totalFrequencies);
-  for (const auto &row : sortedFreq) {
-    std::cout << row.first << ": " << row.second << std::endl;
-  }
 
   database = sortedFreq;
 
@@ -86,13 +83,11 @@ std::map<std::string, int> FrequencyBased::countFrequencies(
          ++frequencies[s];
     }
 
-    //std::cout << frequencies["Coordinate"] << std::endl;
- 
       
     return frequencies;
   }
 
-//lower case
+
 std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
 
