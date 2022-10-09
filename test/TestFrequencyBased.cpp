@@ -2,14 +2,6 @@
 #include "Exceptions.h"
 #include "gtest/gtest.h"
 
-// TEST(TestCircle, illegal) {
-//   EXPECT_THROW(new Circle(0), invalid_parameter_error);
-//   EXPECT_THROW(new Circle(-1), invalid_parameter_error);
-//   EXPECT_THROW(new Circle(-127), invalid_parameter_error);
-// }
-
-
-
 TEST(TestFrequencyBased, illegal) {
   std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
@@ -36,6 +28,7 @@ TEST(TestFrequencyBased, testSuggestion) {
   suggestions = freqBased->getSuggestions("get");
 
   EXPECT_EQ(4, suggestions->size());
+  EXPECT_EQ("getY", suggestions->at(1));
 
   delete freqBased;
 }
