@@ -6,12 +6,10 @@ TEST(TestFrequencyBased, illegal) {
   std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);
-  std::vector<std::string> *suggestions = new std::vector<std::string>();
 
   EXPECT_THROW(freqBased->getSuggestions("ge"), input_too_small_error);
 
   delete freqBased;
-  delete suggestions;
 }
 
 TEST(TestFrequencyBased, testSuggestion) {
