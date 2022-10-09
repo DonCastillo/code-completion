@@ -11,7 +11,7 @@ int main() {
   freqBased->readData(directory);
   std::vector<std::string>* suggestions = new std::vector<std::string>();
 
-  std::cout << "Welcome to Code Complete 1.0 by Don & Karamullah" << std::endl;
+  std::cout << "\nWelcome to Code Complete 1.0 by Don & Karamullah" << std::endl;
   std::cout << "Copyright © 2022\n\n" << std::endl;
   std::cout << "Type x or exit to end the program any time.\n\n" << std::endl;
  
