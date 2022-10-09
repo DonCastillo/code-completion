@@ -11,6 +11,7 @@ TEST(TestFrequencyBased, illegal) {
   EXPECT_THROW(freqBased->getSuggestions("ge"), input_too_small_error);
 
   delete freqBased;
+  delete suggestions;
 }
 
 TEST(TestFrequencyBased, testSuggestion) {
@@ -28,6 +29,7 @@ TEST(TestFrequencyBased, testSuggestion) {
   EXPECT_EQ("getY", suggestions->at(1));
 
   delete freqBased;
+  delete suggestions;
 }
 
 TEST(TestFrequencyBased, testAppend) {
