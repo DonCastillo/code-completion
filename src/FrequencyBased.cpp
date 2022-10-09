@@ -1,6 +1,7 @@
 #include "FrequencyBased.h"
 #include "FileReader.h"
 #include "RegExp.h"
+#include "Exceptions.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -53,7 +54,7 @@ void FrequencyBased::readData(std::string directory) {
   std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
       totalFrequencies);
   for (const auto &row : sortedFreq) {
-    //std::cout << row.first << ": " << row.second << std::endl;
+    std::cout << row.first << ": " << row.second << std::endl;
   }
 
   database = sortedFreq;
@@ -95,12 +96,16 @@ std::map<std::string, int> FrequencyBased::countFrequencies(
 std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
 
+
+  if (query.size() < 3)
+     throw input_too_small_error("Your input size must be greater than 2");
+
   std::vector<std::string>* suggestions = new std::vector<std::string>();
   int counter = 0;
 
   std::string input = query;
   std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-  std::cout << input << std::endl;
+  std::string exact;
 
    for (const auto &row : database) {
    std::string word = row.first;
@@ -114,12 +119,19 @@ std::vector<std::string>* FrequencyBased::getSuggestions(
     std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
     if (std::regex_search(word, m, e, std::regex_constants::match_default)) {
-         std::cout << "MATCH: " << row.first << std::endl;
-         suggestions->push_back(row.first);
+         
+         //exact match should be at top
+         if (word == input) {
+          suggestions->insert(suggestions->begin(), row.first);
+         } else { 
+          suggestions->push_back(row.first);
+         }
          counter++;
     }
 
    }
+
+
  
 
   return suggestions;

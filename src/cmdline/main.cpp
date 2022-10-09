@@ -3,12 +3,43 @@
 #include "FrequencyBased.h"
 #include <string>
 #include <iostream>
+#include "Exceptions.h"
 
 int main() {
   std::string directory = "./data/chess/src";
   FrequencyBased *freqBased = new FrequencyBased();
   freqBased->readData(directory);
-  std::vector<std::string>* test = freqBased->getSuggestions("get");
+  std::vector<std::string>* suggestions = new std::vector<std::string>();
+
+  std::cout << "Welcome to Code Complete 1.0 by Don & Karamullah" << std::endl;
+  std::cout << "Copyright © 2022\n\n" << std::endl;
+  std::cout << "Type x or exit to end the program any time.\n\n" << std::endl;
+ 
+
+  //todo directory input
+
+  std::string input;
+  while(true) {
+    std::cout << "Query:";
+    std::cin >> input;
+
+    if (input == "x" || input == "exit") {
+      std::cout << "Exited program." << std::endl;
+      break;
+    }
+
+ 
+    suggestions = freqBased->getSuggestions(input);
+
+    for (std::vector<std::string>::iterator t=suggestions->begin(); t!=suggestions->end(); ++t) 
+    {
+        std::cout << *t << std::endl;
+    }
+    std::cout << "\n" << std::endl;
+ 
+  }
+
+
  
   delete freqBased;
   return 0;
