@@ -15,7 +15,7 @@
 namespace fs = std::filesystem;
 
 bool FrequencyBased::sortByVal(const std::pair<std::string, int> &a,
-               const std::pair<std::string, int> &b) {
+                               const std::pair<std::string, int> &b) {
   return a.second > b.second;
 }
 
@@ -33,24 +33,19 @@ std::vector<std::pair<std::string, int>> FrequencyBased::sortFrequencies(
 
 void FrequencyBased::readData(std::string directory) {
   std::map<std::string, int> totalFrequencies;
- 
+
   std::cout << "Data imported from: " << directory << "\n" << std::endl;
 
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directory);
 
- 
-
-
   std::string output;
   std::map<std::string, int> words;
   for (const auto &row : files) {
-       output = FileReader::getFileContent(row);
-       words = countFrequencies(RegExp::getMethodNames(output));
-       appendFrequencies(totalFrequencies, words); 
+    output = FileReader::getFileContent(row);
+    words = countFrequencies(RegExp::getMethodNames(output));
+    appendFrequencies(totalFrequencies, words);
   }
- 
 
-  
   std::vector<std::pair<std::string, int>> sortedFreq = sortFrequencies(
       totalFrequencies);
 
@@ -74,62 +69,54 @@ void FrequencyBased::appendFrequencies(std::map<std::string, int> &master,
 }
 
 std::map<std::string, int> FrequencyBased::countFrequencies(
-      const std::vector<std::string> &methods) {
- 
+    const std::vector<std::string> &methods) {
 
-    std::map<std::string, int> frequencies;
+  std::map<std::string, int> frequencies;
 
-    for(const std::string& s : methods) {
-         ++frequencies[s];
-    }
-
-      
-    return frequencies;
+  for (const std::string &s : methods) {
+    ++frequencies[s];
   }
 
+  return frequencies;
+}
 
 std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
 
-
   if (query.size() < 3)
-     throw input_too_small_error("Your input size must be greater than 2");
+    throw input_too_small_error("Your input size must be greater than 2");
 
-  std::vector<std::string>* suggestions = new std::vector<std::string>();
+  std::vector<std::string> *suggestions = new std::vector<std::string>();
   int counter = 0;
 
   std::string input = query;
   std::transform(input.begin(), input.end(), input.begin(), ::tolower);
   std::string exact;
 
-   for (const auto &row : database) {
-   std::string word = row.first;
+  for (const auto &row : database) {
+    std::string word = row.first;
 
     if (counter == 7)
       break;
-    
+
     const std::regex e(input);
     std::smatch m;
 
     std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
     if (std::regex_search(word, m, e, std::regex_constants::match_default)) {
-         
-         //exact match should be at top
-         if (word == input) {
-          suggestions->insert(suggestions->begin(), row.first);
-         } else { 
-          suggestions->push_back(row.first);
-         }
-         counter++;
+
+      //exact match should be at top
+      if (word == input) {
+        suggestions->insert(suggestions->begin(), row.first);
+      } else {
+        suggestions->push_back(row.first);
+      }
+      counter++;
     }
 
-   }
-
-
- 
+  }
 
   return suggestions;
 }
-
 

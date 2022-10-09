@@ -34,8 +34,6 @@ class FrequencyBased : public CodeCompletion {
    */
   std::vector<std::string>* getSuggestions(const std::string query);
 
-
-
   /**
    * Combine maps contain freqencies
    * @param master main map to store into
@@ -45,8 +43,6 @@ class FrequencyBased : public CodeCompletion {
   void appendFrequencies(std::map<std::string, int> &master,
                          std::map<std::string, int> &toAppend);
 
-
-
   /**
    * Count frquencies of methods in list
    * @param methods a vector of methods
@@ -54,8 +50,6 @@ class FrequencyBased : public CodeCompletion {
    */
   std::map<std::string, int> countFrequencies(
       const std::vector<std::string> &methods);
-
-
 
   /**
    * Sort map from highest to lowest frequency count
@@ -65,7 +59,6 @@ class FrequencyBased : public CodeCompletion {
   std::vector<std::pair<std::string, int>> sortFrequencies(
       const std::map<std::string, int> &frequencies);
 
-
   /**
    * Function used by sortFrequencies function to compare during sorting
    * @param a map of methods
@@ -73,14 +66,13 @@ class FrequencyBased : public CodeCompletion {
    * @return whether a is greater than b
    */
   static bool sortByVal(const std::pair<std::string, int> &a,
-                 const std::pair<std::string, int> &b);
-
+                        const std::pair<std::string, int> &b);
 
   /**
    * Map of methods, sorted
    */
-   std::vector<std::pair<std::string, int>> database;               
- 
+  std::vector<std::pair<std::string, int>> database;
+
 };
 
 #endif //FREQUENCY_BASED_H_INCLUDED

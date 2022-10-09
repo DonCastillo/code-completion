@@ -9,8 +9,8 @@ namespace fs = std::filesystem;
 
 std::vector<fs::path> FileReader::getNonEmptyFiles(std::string directory) {
   std::vector<fs::path> files;
-  for (const fs::directory_entry &directory_entry:
-      fs::recursive_directory_iterator(directory)) {
+  for (const fs::directory_entry &directory_entry : fs::recursive_directory_iterator(
+      directory)) {
     if (directory_entry.exists() && directory_entry.is_regular_file()
         && !fs::is_empty(directory_entry.path())) {
       files.push_back(directory_entry.path());
