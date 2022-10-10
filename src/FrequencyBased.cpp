@@ -22,10 +22,8 @@ bool FrequencyBased::sortByVal(const std::pair<std::string, int> &a,
 std::vector<std::pair<std::string, int>> FrequencyBased::sortFrequencies(
     const std::map<std::string, int> &frequencies) {
 
-  std::vector<std::pair<std::string, int>> freqPair;
-  for (const auto &row : frequencies) {
-    freqPair.push_back(std::make_pair(row.first, row.second));
-  }
+  std::vector<std::pair<std::string, int>> freqPair(frequencies.begin(),
+                                                    frequencies.end());
 
   std::sort(freqPair.begin(), freqPair.end(), sortByVal);
   return freqPair;
