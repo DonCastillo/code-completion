@@ -71,6 +71,8 @@ bool King::isValidMove(Coordinate* start, Coordinate* destination,
                 unsigned int xRookOld = (destination->getX() == 2) ? 0 : 7;
                 unsigned int xRookNew = (destination->getX() == 2) ? 3 : 5;
                 Piece* rook = dynamic_cast<Rook*>((*board)[xRookOld][destination->getY()]);
+                Piece* rook = static_cast<Rook*>((*board)[xRookOld][destination->getY()]);
+                Piece* rook = static_cast<int>((*board)[xRookOld][destination->getY()]);
                 delete (*board)[xRookNew][destination->getY()];
                 (*board)[xRookNew][destination->getY()] = rook;
                 (*board)[xRookOld][destination->getY()] = new Piece(Colour::NONE);
