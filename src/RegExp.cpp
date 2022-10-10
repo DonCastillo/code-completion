@@ -46,6 +46,12 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
       continue;
     }
 
+    if (std::regex_search(matchedString, c, PATTERN3)
+        && std::regex_search(matchedString, c, PATTERN4)) {
+      finalMatches.push_back(matchedString.substr(5));
+      continue;
+    }
+
     // if dynamic_cast<.*>, static_cast<.*>,
     // retain the method names only
     if (std::regex_search(matchedString, c, PATTERN5)) {
