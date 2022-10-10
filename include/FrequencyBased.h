@@ -9,6 +9,7 @@
 #include <vector>
 #include <filesystem>
 #include <map>
+#include <utility>
 
 namespace fs = std::filesystem;
 
@@ -72,7 +73,6 @@ class FrequencyBased : public CodeCompletion {
    * Map of methods, sorted
    */
   std::vector<std::pair<std::string, int>> database;
-
 };
 
 #endif //FREQUENCY_BASED_H_INCLUDED

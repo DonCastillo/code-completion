@@ -91,7 +91,6 @@ std::vector<std::string>* FrequencyBased::getSuggestions(
     std::smatch m;
 
     if (std::regex_search(word, m, e, std::regex_constants::match_default)) {
-
       const std::string freqString = word + ":" + std::to_string(freq);
 
       //exact match should be at top
