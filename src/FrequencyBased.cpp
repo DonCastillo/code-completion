@@ -33,16 +33,12 @@ std::vector<std::pair<std::string, int>> FrequencyBased::sortFrequencies(
 
 void FrequencyBased::readData(std::string directory) {
   std::map<std::string, int> totalFrequencies;
-
-  std::cout << "Data imported from: " << directory << "\n" << std::endl;
-
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directory);
 
-  std::string output;
-  std::map<std::string, int> words;
   for (const auto &row : files) {
-    output = FileReader::getFileContent(row);
-    words = countFrequencies(RegExp::getMethodNames(output));
+    std::string output = FileReader::getFileContent(row);
+    std::map<std::string, int> words = countFrequencies(
+        RegExp::getMethodNames(output));
     appendFrequencies(totalFrequencies, words);
   }
 
@@ -50,7 +46,6 @@ void FrequencyBased::readData(std::string directory) {
       totalFrequencies);
 
   database = sortedFreq;
-
 }
 
 void FrequencyBased::appendFrequencies(std::map<std::string, int> &master,
@@ -84,39 +79,29 @@ std::vector<std::string>* FrequencyBased::getSuggestions(
     const std::string query) {
 
   if (query.size() < 3)
-    throw input_too_small_error("Your input size must be greater than 2");
+    throw input_error("Your input size must be greater than 2");
 
   std::vector<std::string> *suggestions = new std::vector<std::string>();
-  int counter = 0;
-
-  std::string input = query;
-  std::transform(input.begin(), input.end(), input.begin(), ::tolower);
-  std::string exact;
 
   for (const auto &row : database) {
     std::string word = row.first;
+    int freq = row.second;
 
-    if (counter == 7)
-      break;
-
-    const std::regex e(input);
+    const std::regex e("\\b" + query);
     std::smatch m;
-
-    std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
     if (std::regex_search(word, m, e, std::regex_constants::match_default)) {
 
-      //exact match should be at top
-      if (word == input) {
-        suggestions->insert(suggestions->begin(), row.first);
-      } else {
-        suggestions->push_back(row.first);
-      }
-      counter++;
-    }
+      const std::string freqString = word + ":" + std::to_string(freq);
 
+      //exact match should be at top
+      if (word == query) {
+        suggestions->insert(suggestions->begin(), freqString);
+      } else {
+        suggestions->push_back(freqString);
+      }
+    }
   }
 
   return suggestions;
 }
-
