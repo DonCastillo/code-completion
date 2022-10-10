@@ -7,10 +7,9 @@
 std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
   std::vector<std::string> finalMatches;
 
-  // std::cout << "Inside getMatchingMethodNames" << std::endl;
-
   // select all statements with open-parentheses
-  const std::regex PATTERN1("\\b(std::|::)?\\w{2,}(?=\\()");
+  const std::regex PATTERN1(
+      "\\b(std::|::)?(\\w{2,}|(dynamic|static)_cast<.*>)(?=\\()");
 
   // select all statements starting with for, if, else, while, switch
   const std::regex PATTERN2("\\b(for|if|else|while|switch)\\b");
@@ -20,6 +19,9 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
 
   // select all statements that has std:: in the beginning
   const std::regex PATTERN4("\\bstd::");
+
+  // select all dynamic and static cast statements
+  const std::regex PATTERN5("\\b(dynamic|static)_cast(?=<.*>)");
 
   auto start = std::sregex_iterator(lines.begin(), lines.end(), PATTERN1);
   auto end = std::sregex_iterator();
@@ -41,6 +43,13 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
     // don't include method definitions and retain std:: methods/constuctors
     if (std::regex_search(matchedString, c, PATTERN3)
         && !std::regex_search(matchedString, c, PATTERN4)) {
+      continue;
+    }
+
+    // if dynamic_cast<.*>, static_cast<.*>,
+    // retain the method names only
+    if (std::regex_search(matchedString, c, PATTERN5)) {
+      finalMatches.push_back(c[0]);
       continue;
     }
 
