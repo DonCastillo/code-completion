@@ -8,8 +8,7 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
   std::vector<std::string> finalMatches;
 
   // select all statements with open-parentheses
-  const std::regex PATTERN1(
-      "\\b(std::|::)?(\\w{2,}|(dynamic|static)_cast<.*>)(?=\\()");
+  const std::regex PATTERN1("\\b(std::|::)?\\w{2,}(?=\\()");
 
   // select all statements starting with for, if, else, while, switch
   const std::regex PATTERN2("\\b(for|if|else|while|switch)\\b");
@@ -25,8 +24,6 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
 
   auto start = std::sregex_iterator(lines.begin(), lines.end(), PATTERN1);
   auto end = std::sregex_iterator();
-
-  int index = 0;
 
   for (auto match = start; match != end; match++) {
     std::smatch m = *match;
@@ -51,14 +48,17 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
       continue;
     }
 
-    // if dynamic_cast<.*>, static_cast<.*>,
-    // retain the method names only
-    if (std::regex_search(matchedString, c, PATTERN5)) {
-      finalMatches.push_back(c[0]);
-      continue;
-    }
-
     finalMatches.push_back(matchedString);
   }
+
+  start = std::sregex_iterator(lines.begin(), lines.end(), PATTERN5);
+  end = std::sregex_iterator();
+
+  for (auto match = start; match != end; match++) {
+    std::smatch m = *match;
+    std::string matchedString = m.str();
+    finalMatches.push_back(matchedString);
+  }
+
   return finalMatches;
 }
