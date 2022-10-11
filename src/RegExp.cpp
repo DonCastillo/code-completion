@@ -31,7 +31,6 @@ std::vector<std::string> RegExp::getMethodNames(const std::string &lines) {
   for (auto match = start; match != end; match++) {
     std::smatch m = *match;
     std::smatch c;
-    // std::smatch v;
 
     std::string matchedString = m.str();
 

@@ -21,7 +21,7 @@ TEST(TestFileReader, emptyDirectory) {
   EXPECT_EQ(0, files.size());
 }
 
-TEST(TestFileReader, blankFile) {
+TEST(TestFileReader, directoryWithBlankFile) {
   std::string directoryPath = "data/blankfile";
   std::vector<fs::path> files = FileReader::getNonEmptyFiles(directoryPath);
 
