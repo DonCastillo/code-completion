@@ -80,10 +80,14 @@ std::vector<std::string>* FrequencyBased::getSuggestions(
     throw input_error("Your input size must be greater than 2");
 
   std::vector<std::string> *suggestions = new std::vector<std::string>();
+  int counter = 0;
 
   for (const auto &row : database) {
     std::string word = row.first;
     int freq = row.second;
+
+    if (counter == 7)
+      break;
 
     const std::regex e("\\b" + query);
     std::smatch m;
@@ -97,6 +101,8 @@ std::vector<std::string>* FrequencyBased::getSuggestions(
       } else {
         suggestions->push_back(freqString);
       }
+
+      counter++;
     }
   }
 
