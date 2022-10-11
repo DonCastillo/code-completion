@@ -99,13 +99,14 @@ TEST(TestFrequencyBased, testSuggestion) {
   std::regex_search(suggestions->at(0), c, PATTERN);
   EXPECT_EQ("getX", c[0]);
   EXPECT_EQ(1, suggestions->size());
+  delete suggestions;
 
   suggestions = freqBased->getSuggestions("get");
   std::regex_search(suggestions->at(1), c, PATTERN);
   EXPECT_EQ("getY", c[0]);
   EXPECT_EQ(4, suggestions->size());
-
-  delete freqBased;
   delete suggestions;
+  
+  delete freqBased;
 }
 
