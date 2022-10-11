@@ -106,7 +106,7 @@ TEST(TestFrequencyBased, testSuggestion) {
   EXPECT_EQ("getY", c[0]);
   EXPECT_EQ(4, suggestions->size());
   delete suggestions;
-  
+
   delete freqBased;
 }
 
