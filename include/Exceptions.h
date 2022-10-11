@@ -1,3 +1,7 @@
+/**
+ * @file Exceptions.h
+ * @brief Handles exceptions
+ */
 #ifndef INCLUDE_EXCEPTIONS_H_
 #define INCLUDE_EXCEPTIONS_H_
 

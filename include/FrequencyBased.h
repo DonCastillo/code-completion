@@ -1,6 +1,7 @@
-// Minimal source file for a placebo class that does nothing but allows the
-// pipeline to pass.
-
+/**
+ * @file FrequencyBased.h
+ * @brief Frequency-based code completion
+ */
 #ifndef FREQUENCY_BASED_H_INCLUDED
 #define FREQUENCY_BASED_CLASS_H_INCLUDED
 
@@ -46,7 +47,7 @@ class FrequencyBased : public CodeCompletion {
 
   /**
    * Count frquencies of methods in list
-   * @param methods a vector of methods
+   * @param methods a vector of method names
    * @return map of methods with their count
    */
   std::map<std::string, int> countFrequencies(

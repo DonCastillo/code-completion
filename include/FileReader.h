@@ -1,3 +1,7 @@
+/**
+ * @file FileReader.h
+ * @brief Handles all methods related to data retrieval from files/directory
+ */
 #ifndef INCLUDE_FILEREADER_H_
 #define INCLUDE_FILEREADER_H_
 
