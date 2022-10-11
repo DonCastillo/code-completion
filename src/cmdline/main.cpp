@@ -33,7 +33,6 @@ int main() {
       std::cout << *t << std::endl;
     }
     std::cout << "\n" << std::endl;
-
   }
 
   delete freqBased;
