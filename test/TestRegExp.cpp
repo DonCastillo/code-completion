@@ -174,10 +174,10 @@ TEST(TestRegExp, dynamicAndStaticCast) {
 
   methods = RegExp::getMethodNames(s1);
   EXPECT_EQ(6, methods.size());
-  EXPECT_EQ("dynamic_cast", methods.at(0));
+  EXPECT_EQ("getY", methods.at(0));
   EXPECT_EQ("getY", methods.at(1));
-  EXPECT_EQ("static_cast", methods.at(2));
-  EXPECT_EQ("getY", methods.at(3));
+  EXPECT_EQ("getY", methods.at(2));
+  EXPECT_EQ("dynamic_cast", methods.at(3));
   EXPECT_EQ("static_cast", methods.at(4));
-  EXPECT_EQ("getY", methods.at(5));
+  EXPECT_EQ("static_cast", methods.at(5));
 }
